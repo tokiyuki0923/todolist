@@ -1,1 +1,35 @@
 @charset "UTF-8";
+
+*{
+    box-sizing: border-box;
+}
+.title{
+    display: flex;
+    justify-content: center;
+}
+.contents_up{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+#new{
+    width: 250px;
+}
+.contents_down{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.contents_item{
+    background: gray;
+    width: 300px;
+    list-style: none;
+}
+.delete{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.all_delete{
+    width: 200px;
+}
