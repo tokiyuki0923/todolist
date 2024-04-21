@@ -7,9 +7,19 @@ const getForm = document.getElementById("formtagu");
 const getInput = document.getElementById("new");
 const ul = document.getElementById("ul");
 
-// フォームタグがEnterされた時、普通なら再レンダリングが発生してしまうが、それを止める。preventDefaultは、本来なら起こるブラウザの挙動を止めるためのメソッド（WebAPI）
+//画面をリロードした時やtodoリスト開いた時に、ローカルストレージに保存されているtodosを取得してくる。その際に、JSON形式の文字列として保存されているため、parseでJSのオブジェクトに変換する
+const todos = JSON.parse(localStorage.getItem("todos"));
+
+// もしローカルストレージに保存されているtodosが空じゃなかったらそれぞれを追加しなおす作業
+if(todos){
+    todos.forEach(todo => {
+        add(todo)
+    });
+}
+
 //変数名.addEventListner→変数名の中身がsubmit(他にもいろんなイベントがある)が行われた時、functionの中身が行われる
 getForm.addEventListener("submit", function (event){
+    // フォームタグがEnterされた時、普通なら再レンダリングが発生してしまうが、それを止める。preventDefaultは、本来なら起こるブラウザの挙動を止めるためのメソッド（WebAPI）
     event.preventDefault();
     
     // 下に書いてあるadd関数を実行
@@ -17,8 +27,15 @@ getForm.addEventListener("submit", function (event){
 });
 
 // Enter押された時に、liタグを追加すると言う関数を定義
-function add (){
+function add (todo){
     let todoText = getInput.value 
+    
+    //もし、過去に保存されていたtodoがあった場合、todoにはtodoTextをいれるという処理　
+    if (todo) {
+        todoText = todo;
+    }
+
+    // もしtodoTextの長さが1文字以上だった場合、if文の中身を実行する
     if(todoText.length > 0){
     
     // Enter押された時に、liタグを追加する。
