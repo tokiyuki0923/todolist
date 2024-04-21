@@ -20,7 +20,8 @@ getForm.addEventListener("submit", function (event){
 function add (){
     let todoText = getInput.value 
     if(todoText.length > 0){
-            // Enter押された時に、liタグを追加する。
+    
+    // Enter押された時に、liタグを追加する。
     const li = document.createElement("li");
 
     // そのliのテキストはinputタグに書かれている内容とする
@@ -35,6 +36,27 @@ function add (){
     // 最後にinputの中身を空にする
     // getInput.valueではなくてtodoTextにしたら動かなかった、なんでだろう
     getInput.value = "";
+
+    // 下にあるsaveDateという関数を発動
+    saveDate(); 
+
     }
 }
+// saveDateという関数を定義、最終的にはliタグを全て配列の形にしてローカルストレージに保存する
+function saveDate(){
 
+    // querySelectorAll("")で指定したものを全て取得する。このときNodeListという、配列によく似た形で取得してくる
+    const lists = document.querySelectorAll("li");
+
+    // 空っぽの配列をtodosという変数に定義する
+    const todos = [];
+
+    // liタグのインナーテキストをそれぞれ全て取得する
+    lists.forEach(list =>{
+        // liタグのinnerTextを先ほど定義したtodosという配列にpushする
+        todos.push(list.innerText);
+    });
+
+    // localStrage.setItemでローカルストレージに保存する。保存したいデータが複数（配列）だった場合、JSON形式の文字列で保存しなくちゃいけない。その時使うのがJSON.stringify()となる
+    localStorage.setItem("todos",JSON.stringify(todos));
+}
