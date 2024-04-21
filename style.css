@@ -33,3 +33,7 @@
 .all_delete{
     width: 200px;
 }
+
+.text-decoration-line-through{
+    text-decoration: line-through;
+}
