@@ -77,3 +77,4 @@ function saveDate(){
     // localStrage.setItemでローカルストレージに保存する。保存したいデータが複数（配列）だった場合、JSON形式の文字列で保存しなくちゃいけない。その時使うのがJSON.stringify()となる
     localStorage.setItem("todos",JSON.stringify(todos));
 }
+
