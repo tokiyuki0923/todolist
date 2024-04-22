@@ -32,7 +32,7 @@ function add (todo){
     let todoText = getInput.value;
 
     if(todo){
-        todoText = todo;
+        todoText = todo.text ;
     }
 
     if(todoText){
@@ -96,7 +96,11 @@ function saveDate(){
     
     // タスクのインナーテキストとクラス名"text-decoration-line-through"が追加されているかどうかをそれぞれ全て取得する
     lists.forEach(list => {
-        todos.push(list.innerText);
+        let todo = {
+            text: list.innerText,
+            completed: list.classList.contains("text-decoration-line-through")
+        };
+        todos.push(todo);
     });
     
     // localStrage.setItemでローカルストレージに保存する。保存したいデータが複数（配列）だった場合、JSON形式の文字列で保存しなくちゃいけない。その時使うのがJSON.stringify()となる
