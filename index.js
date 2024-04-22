@@ -32,7 +32,7 @@ function add (todo){
     let todoText = getInput.value;
 
     if(todo){
-        todoText = todo.text;
+        todoText = todo;
     }
 
     if(todoText){
