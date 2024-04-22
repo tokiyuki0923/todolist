@@ -7,10 +7,12 @@ const getForm = document.getElementById("formtagu");
 const getInput = document.getElementById("new");
 const ul = document.getElementById("ul");
 
-//画面をリロードした時やtodoリスト開いた時に、ローカルストレージに保存されているtodosを取得してくる。その際に、JSON形式の文字列として保存されているため、parseでJSのオブジェクトに変換する
+//画面をリロードした時やtodoリスト開いた時に、ローカルストレージに保存されているtodosを取得してくる。その際に、JSON形式の文字列として保存されているため、parseでJSのオブジェクトに変換する。
 const todos = JSON.parse(localStorage.getItem("todos"));
 
 // もしローカルストレージに保存されているtodosが空じゃなかったらそれぞれを追加しなおす作業
+// 仮引数を設定しないとforEach文は機能しない。ECMAScriptでそう設定されている。こう覚えるしかない
+// 疑問として、todoが定義してあるのはlists.forEach文の中なのに、なぜグローバルスコープから参照可能なのかという点
 if(todos){
     todos.forEach(todo => {
         add(todo);
@@ -29,22 +31,28 @@ getForm.addEventListener("submit", function (event){
 // Enter押された時に、liタグを追加すると言う関数を定義
 function add (todo){
 
+    // inputタグに書かれているものをtodoTextと定義
     let todoText = getInput.value;
 
+
+    // もし、下の方で定義してあるtodoが存在（true）すれば、書いてある内容をtodoTextに定義
     if(todo){
         todoText = todo.text ;
     }
 
+    // もし、todoTextが存在するならば（inputタグに書かれている内容が存在する時と、ローカルストレージに保存してあるものが存在する時）、以下の関数を実行する。
     if(todoText){
         //Enter押された時に、liタグを追加する。
     const li = document.createElement("li");
 
-    // そのliのテキストはinputタグに書かれている内容とする
+    // そのliのテキストはinputタグに書かれている内容と、ローカルストレージに保存してあるものとする
     li.innerText = todoText;
 
     // 実際に追加されたliタグにclassを付与する
     li.classList.add("list-group-item");
 
+    /* もし、「ローカルストレージに保存しているものがある」且つ、「それの状態がcompleted（クラスにtext-decoration-line-throughが含まれている）」だった場合、
+    追加し直すliにtext-decoration-line-throughというクラスを付与する */
     if(todo && todo.completed){
         li.classList.add("text-decoration-line-through")
     }
@@ -96,10 +104,12 @@ function saveDate(){
     
     // タスクのインナーテキストとクラス名"text-decoration-line-through"が追加されているかどうかをそれぞれ全て取得する
     lists.forEach(list => {
+        // listの内容をtext、text-decoration-line-throughが含まれていたらcompletedという状態をtodoと定義
         let todo = {
             text: list.innerText,
             completed: list.classList.contains("text-decoration-line-through")
         };
+        // todoをtodosという空っぽの配列にpushする
         todos.push(todo);
     });
     
