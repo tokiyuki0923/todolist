@@ -25,11 +25,7 @@
     width: 300px;
     list-style: none;
 }
-.delete{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-.all_delete{
-    width: 200px;
+
+.text-decoration-line-through{
+    text-decoration: line-through;
 }
