@@ -51,7 +51,7 @@ function add (todo){
     // 実際に追加されたliタグにclassを付与する
     li.classList.add("list-group-item");
 
-    /* もし、「ローカルストレージに保存しているものがある」且つ、「それの状態がcompleted（クラスにtext-decoration-line-throughが含まれている）」だった場合、
+    /* もし、「ローカルストレージに保存しているもの」があり「completed状態（クラスにtext-decoration-line-throughが含まれている）」を返した場合
     追加し直すliにtext-decoration-line-throughというクラスを付与する */
     if(todo && todo.completed){
         li.classList.add("text-decoration-line-through")
