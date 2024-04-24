@@ -4,8 +4,9 @@
 
 機能|実装方法|結果
 ----|------|---
-タスクの追加|inputタグの情報を取得し、addEventListenerでsubmitを設定。その後appendChildでliを設定。|Enterを押した時に入力した内容がタスクとして出力される。
+必要な情報の取得|document.getElementByIdで必要な情報を取得してくる|指定したidを持つタグを取得してくる
+タスクの追加|inputタグの情報を指定し、addEventListenerでsubmitを設定。その後appendChildでliを設定。|Enterを押した時に入力した内容がタスクとして出力される。
 取消線を付与、解除|addEventListenerでclickを設定。classList.toggle("")で指定したクラスを付与したり解除したりする。予めそのクラスには取消線を付与するCSSを当てておく。|タスクをクリックした時に取消線を付与したり、解除したりする。
 リロードしても追加したタスクを残す(1)|localstorage.setitem()でタスクを選択し、JSONの文字列に変えてローカルストレージに保存する。|ブラウザのローカルストレージ内にJSON形式の配列風に保存される。
 リロードしても追加したタスクを残す(2)|localstorage.getitem()で保存してあるアイテムを選択し取得。その後、上の方にif文でローカルストレージ内に保存してあるアイテムが存在する場合出力すると記述。|もしローカルストレージ内にアイテムが存在する場合はリロードした際に出力してくる。
-完了したタスクを削除する|addEventListenerでcontextmenuを設定。その後li.remove()を関数内に記述。|ダブルクリックした際、タスクが消える
+完了したタスクを削除する|addEventListenerでcontextmenuを設定。その後li.remove()を関数内に記述。|右クリックした際、タスクが消える
